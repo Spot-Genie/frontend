@@ -2,25 +2,49 @@
 
 import useKakaoLoader from "@/components/use-kakao-loader";
 import { api } from "@/services/api";
-import { Gu } from "@/types/gu";
+
 import { useEffect, useState } from "react";
 import { Map, Polygon } from "react-kakao-maps-sdk";
 import { transformer } from "@/utils/proj-transformer";
+import { GeoFeature, GeoRegion } from "@/types/geo";
 
 export default function Home() {
   useKakaoLoader();
 
-  const [gu, setGu] = useState<Gu>();
-  const [mouseOverGu, setMouseOverGu] = useState<string | null>(null);
+  const [guList, setGuList] = useState<GeoFeature[]>([]);
+  const [dongList, setDongList] = useState<GeoFeature[]>([]);
+  const [mouseOverGeo, setMouseOverGeo] = useState<string | null>(null);
+  const [isDongMode, setIsDongMode] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await api<Gu>("/data/seoul-gu.json");
-      setGu(data);
+    const getGu = async () => {
+      const { data } = await api<GeoRegion>("/data/seoul-gu.json");
+
+      setGuList(data.features);
     };
 
-    getData();
+    const getDong = async () => {
+      const { data } = await api<GeoRegion>("/data/dong.json");
+      const dongList = data.features.filter((item) => item.geometry?.type === "Polygon");
+
+      setDongList(dongList);
+    };
+
+    getGu();
+    getDong();
   }, []);
+
+  console.log("isDongMode", isDongMode);
+
+  useEffect(() => {
+    dongList.forEach((geo) => {
+      const coordinates = geo.geometry.coordinates[0].map((coord) => {
+        const [x, y] = transformer.forward(coord);
+        return { lat: y, lng: x };
+      });
+      console.log("coordinates", coordinates);
+    });
+  }, [dongList]);
 
   return (
     <section className="h-full">
@@ -34,28 +58,36 @@ export default function Home() {
           height: "100%",
         }}
         level={9}
+        onZoomChanged={(map) => {
+          const level = map.getLevel();
+          if (level <= 5) {
+            setIsDongMode(true);
+          } else {
+            setIsDongMode(false);
+          }
+        }}
       >
-        {gu?.features.map((feature) => {
-          const coordinates = feature.geometry.coordinates[0].map((coord) => {
+        {guList.map((geo, i) => {
+          const coordinates = geo.geometry.coordinates[0].map((coord) => {
             const [x, y] = transformer.forward(coord);
             return { lat: y, lng: x };
           });
 
           return (
             <Polygon
-              key={feature.properties.nm}
+              key={i}
               path={coordinates}
               strokeWeight={3}
               strokeColor={"#39DE2A"}
               strokeOpacity={0.8}
               strokeStyle={"solid"}
-              fillColor={mouseOverGu === feature.properties.nm ? "#EFFFED" : "#A2FF99"}
-              fillOpacity={mouseOverGu === feature.properties.nm ? 0.8 : 0.7}
-              onMouseover={() => setMouseOverGu(feature.properties.nm)}
-              onMouseout={() => setMouseOverGu(null)}
+              fillColor={mouseOverGeo === geo.properties.EMD_KOR_NM ? "#EFFFED" : "#A2FF99"}
+              fillOpacity={mouseOverGeo === geo.properties.EMD_KOR_NM ? 0.8 : 0.7}
+              onMouseover={() => setMouseOverGeo(geo.properties.EMD_KOR_NM)}
+              onMouseout={() => setMouseOverGeo(null)}
               onMousedown={(polygon, mouseEvent) => {
                 console.log(mouseEvent);
-                console.log(feature.properties.nm);
+                console.log(geo.properties.EMD_KOR_NM);
               }}
             />
           );

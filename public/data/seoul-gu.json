@@ -80,7 +80,7 @@
           ]
         ]
       },
-      "properties": { "nm": "종로구" }
+      "properties": { "EMD_KOR_NM": "종로구" }
     },
     {
       "type": "Feature",
@@ -142,7 +142,7 @@
           ]
         ]
       },
-      "properties": { "nm": "중구" }
+      "properties": { "EMD_KOR_NM": "중구" }
     },
     {
       "type": "Feature",
@@ -210,7 +210,7 @@
           ]
         ]
       },
-      "properties": { "nm": "용산구" }
+      "properties": { "EMD_KOR_NM": "용산구" }
     },
     {
       "type": "Feature",
@@ -261,7 +261,7 @@
           ]
         ]
       },
-      "properties": { "nm": "성동구" }
+      "properties": { "EMD_KOR_NM": "성동구" }
     },
     {
       "type": "Feature",
@@ -313,7 +313,7 @@
           ]
         ]
       },
-      "properties": { "nm": "광진구" }
+      "properties": { "EMD_KOR_NM": "광진구" }
     },
     {
       "type": "Feature",
@@ -368,7 +368,7 @@
           ]
         ]
       },
-      "properties": { "nm": "동대문구" }
+      "properties": { "EMD_KOR_NM": "동대문구" }
     },
     {
       "type": "Feature",
@@ -421,7 +421,7 @@
           ]
         ]
       },
-      "properties": { "nm": "중랑구" }
+      "properties": { "EMD_KOR_NM": "중랑구" }
     },
     {
       "type": "Feature",
@@ -510,7 +510,7 @@
           ]
         ]
       },
-      "properties": { "nm": "성북구" }
+      "properties": { "EMD_KOR_NM": "성북구" }
     },
     {
       "type": "Feature",
@@ -594,7 +594,7 @@
           ]
         ]
       },
-      "properties": { "nm": "강북구" }
+      "properties": { "EMD_KOR_NM": "강북구" }
     },
     {
       "type": "Feature",
@@ -661,7 +661,7 @@
           ]
         ]
       },
-      "properties": { "nm": "도봉구" }
+      "properties": { "EMD_KOR_NM": "도봉구" }
     },
     {
       "type": "Feature",
@@ -745,7 +745,7 @@
           ]
         ]
       },
-      "properties": { "nm": "노원구" }
+      "properties": { "EMD_KOR_NM": "노원구" }
     },
     {
       "type": "Feature",
@@ -838,7 +838,7 @@
           ]
         ]
       },
-      "properties": { "nm": "은평구" }
+      "properties": { "EMD_KOR_NM": "은평구" }
     },
     {
       "type": "Feature",
@@ -904,7 +904,7 @@
           ]
         ]
       },
-      "properties": { "nm": "서대문구" }
+      "properties": { "EMD_KOR_NM": "서대문구" }
     },
     {
       "type": "Feature",
@@ -983,7 +983,7 @@
           ]
         ]
       },
-      "properties": { "nm": "마포구" }
+      "properties": { "EMD_KOR_NM": "마포구" }
     },
     {
       "type": "Feature",
@@ -1056,7 +1056,7 @@
           ]
         ]
       },
-      "properties": { "nm": "양천구" }
+      "properties": { "EMD_KOR_NM": "양천구" }
     },
     {
       "type": "Feature",
@@ -1166,7 +1166,7 @@
           ]
         ]
       },
-      "properties": { "nm": "강천구" }
+      "properties": { "EMD_KOR_NM": "강천구" }
     },
     {
       "type": "Feature",
@@ -1260,7 +1260,7 @@
           ]
         ]
       },
-      "properties": { "nm": "구로구" }
+      "properties": { "EMD_KOR_NM": "구로구" }
     },
     {
       "type": "Feature",
@@ -1321,7 +1321,7 @@
           ]
         ]
       },
-      "properties": { "nm": "금천구" }
+      "properties": { "EMD_KOR_NM": "금천구" }
     },
     {
       "type": "Feature",
@@ -1393,7 +1393,7 @@
           ]
         ]
       },
-      "properties": { "nm": "영등포구" }
+      "properties": { "EMD_KOR_NM": "영등포구" }
     },
     {
       "type": "Feature",
@@ -1458,7 +1458,7 @@
           ]
         ]
       },
-      "properties": { "nm": "동작구" }
+      "properties": { "EMD_KOR_NM": "동작구" }
     },
     {
       "type": "Feature",
@@ -1529,7 +1529,7 @@
           ]
         ]
       },
-      "properties": { "nm": "관악구" }
+      "properties": { "EMD_KOR_NM": "관악구" }
     },
     {
       "type": "Feature",
@@ -1646,7 +1646,7 @@
           ]
         ]
       },
-      "properties": { "nm": "서초구" }
+      "properties": { "EMD_KOR_NM": "서초구" }
     },
     {
       "type": "Feature",
@@ -1735,7 +1735,7 @@
           ]
         ]
       },
-      "properties": { "nm": "강남구" }
+      "properties": { "EMD_KOR_NM": "강남구" }
     },
     {
       "type": "Feature",
@@ -1821,7 +1821,7 @@
           ]
         ]
       },
-      "properties": { "nm": "송파구" }
+      "properties": { "EMD_KOR_NM": "송파구" }
     },
     {
       "type": "Feature",
@@ -1892,7 +1892,7 @@
           ]
         ]
       },
-      "properties": { "nm": "강동구" }
+      "properties": { "EMD_KOR_NM": "강동구" }
     }
   ]
 }
