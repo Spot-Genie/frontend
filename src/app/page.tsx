@@ -5,7 +5,7 @@ import { api } from "@/services/api";
 import { Gu } from "@/types/gu";
 import { useEffect, useState } from "react";
 import { Map, Polygon } from "react-kakao-maps-sdk";
-import proj4 from "proj4";
+import { transformer } from "@/utils/proj-transformer";
 
 export default function Home() {
   useKakaoLoader();
@@ -21,11 +21,6 @@ export default function Home() {
 
     getData();
   }, []);
-
-  const utmk =
-    "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";
-  const wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-  const transformer = proj4(utmk, wgs84);
 
   return (
     <section className="h-full">
