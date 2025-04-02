@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Script src={process.env.KAKAO_MAP_API} strategy="beforeInteractive" />
-        <main>{children}</main>
+        <main className="h-svh">{children}</main>
       </body>
     </html>
   );
