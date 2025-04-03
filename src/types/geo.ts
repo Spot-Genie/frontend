@@ -17,5 +17,5 @@ export interface Geometry {
 export interface GeoProperties {
   EMD_CD?: string;
   EMD_ENG_NM?: string;
-  EMD_KOR_NM: string;
+  KOR_NM: string;
 }

@@ -24,7 +24,7 @@ export default function Home() {
     };
 
     const getDong = async () => {
-      const { data } = await api<GeoRegion>("/data/dong.json");
+      const { data } = await api<GeoRegion>("/data/seoul-dong.json");
       const dongList = data.features.filter((item) => item.geometry?.type === "Polygon");
 
       setDongList(dongList);
@@ -33,18 +33,6 @@ export default function Home() {
     getGu();
     getDong();
   }, []);
-
-  console.log("isDongMode", isDongMode);
-
-  useEffect(() => {
-    dongList.forEach((geo) => {
-      const coordinates = geo.geometry.coordinates[0].map((coord) => {
-        const [x, y] = transformer.forward(coord);
-        return { lat: y, lng: x };
-      });
-      console.log("coordinates", coordinates);
-    });
-  }, [dongList]);
 
   return (
     <section className="h-full">
@@ -60,14 +48,14 @@ export default function Home() {
         level={9}
         onZoomChanged={(map) => {
           const level = map.getLevel();
-          if (level <= 5) {
+          if (level <= 7) {
             setIsDongMode(true);
           } else {
             setIsDongMode(false);
           }
         }}
       >
-        {guList.map((geo, i) => {
+        {(isDongMode ? dongList : guList).map((geo, i) => {
           const coordinates = geo.geometry.coordinates[0].map((coord) => {
             const [x, y] = transformer.forward(coord);
             return { lat: y, lng: x };
@@ -78,16 +66,22 @@ export default function Home() {
               key={i}
               path={coordinates}
               strokeWeight={3}
-              strokeColor={"#39DE2A"}
+              strokeColor={isDongMode ? "#2A7EDE" : "#39DE2A"}
               strokeOpacity={0.8}
               strokeStyle={"solid"}
-              fillColor={mouseOverGeo === geo.properties.EMD_KOR_NM ? "#EFFFED" : "#A2FF99"}
-              fillOpacity={mouseOverGeo === geo.properties.EMD_KOR_NM ? 0.8 : 0.7}
-              onMouseover={() => setMouseOverGeo(geo.properties.EMD_KOR_NM)}
+              fillColor={
+                mouseOverGeo === geo.properties.KOR_NM
+                  ? "#EFFFED"
+                  : isDongMode
+                  ? "#99CAFF"
+                  : "#A2FF99"
+              }
+              fillOpacity={mouseOverGeo === geo.properties.KOR_NM ? 0.8 : 0.7}
+              onMouseover={() => setMouseOverGeo(geo.properties.KOR_NM)}
               onMouseout={() => setMouseOverGeo(null)}
               onMousedown={(polygon, mouseEvent) => {
                 console.log(mouseEvent);
-                console.log(geo.properties.EMD_KOR_NM);
+                console.log(geo.properties.KOR_NM);
               }}
             />
           );
