@@ -475,12 +475,29 @@ const dongList = [
   "신내동",
 ];
 
+const gangnamList = [
+  "신사동",
+  "압구정동",
+  "논현동",
+  "청담동",
+  "삼성동",
+  "대치동",
+  "역삼동",
+  "도곡동",
+  "개포동",
+  "일원동",
+  "수서동",
+  "세곡동",
+  "자곡동",
+  "율현동",
+];
+
 const dongData: GeoRegion = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), "public/data/dong.json"), "utf-8")
 );
 
 const filteredFeatures = dongData.features.filter((feature: GeoFeature) =>
-  dongList.includes(feature.properties.KOR_NM)
+  gangnamList.includes(feature.properties.KOR_NM)
 );
 
 const filteredData: GeoRegion = {
@@ -494,7 +511,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 fs.writeFileSync(
-  path.join(outputDir, "seoul-dong.json"),
+  path.join(outputDir, "gangnam-dong.json"),
   JSON.stringify(filteredData, null, 2),
   "utf-8"
 );
