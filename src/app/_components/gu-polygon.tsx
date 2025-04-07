@@ -1,8 +1,8 @@
 import { CustomOverlayMap, Polygon } from "react-kakao-maps-sdk";
 import { transformer } from "@/utils/proj-transformer";
 import { GeoCoordinate, GeoFeature } from "@/types/geo";
-import { useState } from "react";
 import { calculateCenter } from "@/utils/geo";
+import { Button } from "@/components/ui/button";
 
 interface GuPolygonProps {
   geoList: GeoFeature[];
@@ -19,16 +19,6 @@ export default function GuPolygon({
   setMapLevel,
   setIsPolygonClicked,
 }: GuPolygonProps) {
-  const [mouseOverGeo, setMouseOverGeo] = useState<string | null>(null);
-
-  const onMouseOver = (geoName: string) => {
-    setMouseOverGeo(geoName);
-  };
-
-  const onMouseOut = () => {
-    setMouseOverGeo(null);
-  };
-
   const handleClick = (center: GeoCoordinate) => {
     setMapLevel(7);
     setIsDongMode(true);
@@ -53,17 +43,18 @@ export default function GuPolygon({
               strokeWeight={3}
               strokeColor="#39DE2A"
               strokeOpacity={0.8}
-              strokeStyle={"solid"}
-              fillColor={mouseOverGeo === geo.properties.KOR_NM ? "#EFFFED" : "#A2FF99"}
-              fillOpacity={mouseOverGeo === geo.properties.KOR_NM ? 0.8 : 0.7}
-              onMouseover={() => onMouseOver(geo.properties.KOR_NM)}
-              onMouseout={onMouseOut}
-              onClick={() => {
-                handleClick(center);
-              }}
+              strokeStyle={"dashed"}
+              fillColor={"#A2FF99"}
+              fillOpacity={0.7}
             />
             <CustomOverlayMap key={`marker-${i}`} position={center}>
-              <p className="rounded bg-white p-1 text-sm">{geo.properties.KOR_NM}</p>
+              <Button
+                variant="outline"
+                className="rounded bg-white p-1 text-sm"
+                onClick={() => handleClick(center)}
+              >
+                {geo.properties.KOR_NM}
+              </Button>
             </CustomOverlayMap>
           </>
         );

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -20,7 +21,9 @@ export function DongSheet({ geo }: DongSheetProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="rounded bg-white p-1 text-sm hover:bg-gray-300">{name}</button>
+        <Button variant="outline" className="rounded bg-white p-1 text-sm hover:bg-gray-300">
+          {name}
+        </Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -34,7 +37,7 @@ export function DongSheet({ geo }: DongSheetProps) {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <button type="button">확인</button>
+            <Button type="button">확인</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

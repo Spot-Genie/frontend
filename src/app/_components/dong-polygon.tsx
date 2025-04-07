@@ -27,7 +27,7 @@ export default function DongPolygon({ geoList, setIsPolygonClicked }: DongPolygo
               strokeWeight={3}
               strokeColor="#2A7EDE"
               strokeOpacity={0.8}
-              strokeStyle={"solid"}
+              strokeStyle={"dashed"}
               fillColor={"#99CAFF"}
               fillOpacity={0.7}
               onClick={() => {
