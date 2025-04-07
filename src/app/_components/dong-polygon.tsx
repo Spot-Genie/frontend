@@ -1,8 +1,8 @@
 import { Polygon, CustomOverlayMap } from "react-kakao-maps-sdk";
 import { transformer } from "@/utils/proj-transformer";
 import { GeoFeature } from "@/types/geo";
-import { useState } from "react";
 import { calculateCenter } from "@/utils/geo";
+import { DongSheet } from "./dong-sheet";
 
 interface DongPolygonProps {
   geoList: GeoFeature[];
@@ -10,16 +10,6 @@ interface DongPolygonProps {
 }
 
 export default function DongPolygon({ geoList, setIsPolygonClicked }: DongPolygonProps) {
-  const [mouseOverGeo, setMouseOverGeo] = useState<string | null>(null);
-
-  const handleMouseOver = (name: string) => {
-    setMouseOverGeo(name);
-  };
-
-  const handleMouseOut = () => {
-    setMouseOverGeo(null);
-  };
-
   return (
     <>
       {geoList.map((geo, i) => {
@@ -38,17 +28,14 @@ export default function DongPolygon({ geoList, setIsPolygonClicked }: DongPolygo
               strokeColor="#2A7EDE"
               strokeOpacity={0.8}
               strokeStyle={"solid"}
-              fillColor={mouseOverGeo === geo.properties.KOR_NM ? "#EFFFED" : "#99CAFF"}
-              fillOpacity={mouseOverGeo === geo.properties.KOR_NM ? 0.8 : 0.7}
-              onMouseover={() => handleMouseOver(geo.properties.KOR_NM)}
-              onMouseout={handleMouseOut}
+              fillColor={"#99CAFF"}
+              fillOpacity={0.7}
               onClick={() => {
                 setIsPolygonClicked(true);
-                console.log(geo.properties.KOR_NM);
               }}
             />
             <CustomOverlayMap key={`marker-${i}`} position={center} clickable>
-              <p className="rounded bg-white p-1 text-sm">{geo.properties.KOR_NM}</p>
+              <DongSheet geo={geo} />
             </CustomOverlayMap>
           </>
         );
