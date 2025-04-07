@@ -19,3 +19,8 @@ export interface GeoProperties {
   EMD_ENG_NM?: string;
   KOR_NM: string;
 }
+
+export interface GeoCoordinate {
+  lat: number;
+  lng: number;
+}

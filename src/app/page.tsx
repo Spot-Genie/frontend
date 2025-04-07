@@ -14,6 +14,11 @@ export default function Home() {
   const [guList, setGuList] = useState<GeoFeature[]>([]);
   const [dongList, setDongList] = useState<GeoFeature[]>([]);
   const [isDongMode, setIsDongMode] = useState(false);
+  const [mapCenter, setMapCenter] = useState({
+    lat: 37.555941820265105,
+    lng: 127.00801272675048,
+  });
+  const [mapLevel, setMapLevel] = useState(9);
 
   useEffect(() => {
     const getGu = async () => {
@@ -37,20 +42,22 @@ export default function Home() {
   return (
     <section className="h-full">
       <Map
-        center={{
-          lat: 37.555941820265105,
-          lng: 127.00801272675048,
-        }}
+        center={mapCenter}
         style={{
           width: "100%",
           height: "100%",
         }}
-        level={9}
+        level={mapLevel}
       >
         {isDongMode ? (
           <DongPolygon geoList={dongList} />
         ) : (
-          <GuPolygon geoList={guList} setIsDongMode={setIsDongMode} />
+          <GuPolygon
+            geoList={guList}
+            setIsDongMode={setIsDongMode}
+            setMapCenter={setMapCenter}
+            setMapLevel={setMapLevel}
+          />
         )}
       </Map>
     </section>
