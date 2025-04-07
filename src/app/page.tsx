@@ -51,13 +51,21 @@ export default function Home() {
         level={mapLevel}
         onZoomChanged={(map) => {
           const mapLevel = map.getLevel();
+          const center = map.getCenter();
 
-          if (mapLevel > 7) {
+          if (mapLevel <= 7) {
+            setIsDongMode(true);
+            setMapCenter({
+              lat: center.getLat(),
+              lng: center.getLng(),
+            });
+          } else {
             setIsDongMode(false);
           }
         }}
         onClick={() => {
           if (!isPolygonClicked && isDongMode) {
+            setMapLevel(9);
             setIsDongMode(false);
           }
           setIsPolygonClicked(false);
