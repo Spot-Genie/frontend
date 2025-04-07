@@ -19,6 +19,7 @@ export default function Home() {
     lng: 127.00801272675048,
   });
   const [mapLevel, setMapLevel] = useState(9);
+  const [isPolygonClicked, setIsPolygonClicked] = useState(false);
 
   useEffect(() => {
     const getGu = async () => {
@@ -48,15 +49,29 @@ export default function Home() {
           height: "100%",
         }}
         level={mapLevel}
+        onZoomChanged={(map) => {
+          const mapLevel = map.getLevel();
+
+          if (mapLevel > 7) {
+            setIsDongMode(false);
+          }
+        }}
+        onClick={() => {
+          if (!isPolygonClicked && isDongMode) {
+            setIsDongMode(false);
+          }
+          setIsPolygonClicked(false);
+        }}
       >
         {isDongMode ? (
-          <DongPolygon geoList={dongList} />
+          <DongPolygon geoList={dongList} setIsPolygonClicked={setIsPolygonClicked} />
         ) : (
           <GuPolygon
             geoList={guList}
             setIsDongMode={setIsDongMode}
             setMapCenter={setMapCenter}
             setMapLevel={setMapLevel}
+            setIsPolygonClicked={setIsPolygonClicked}
           />
         )}
       </Map>

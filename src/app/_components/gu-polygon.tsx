@@ -9,6 +9,7 @@ interface GuPolygonProps {
   setIsDongMode: React.Dispatch<React.SetStateAction<boolean>>;
   setMapCenter: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }>>;
   setMapLevel: React.Dispatch<React.SetStateAction<number>>;
+  setIsPolygonClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function GuPolygon({
@@ -16,6 +17,7 @@ export default function GuPolygon({
   setIsDongMode,
   setMapCenter,
   setMapLevel,
+  setIsPolygonClicked,
 }: GuPolygonProps) {
   const [mouseOverGeo, setMouseOverGeo] = useState<string | null>(null);
 
@@ -31,6 +33,7 @@ export default function GuPolygon({
     setMapLevel(7);
     setIsDongMode(true);
     setMapCenter(center);
+    setIsPolygonClicked(true);
   };
 
   return (
@@ -55,7 +58,9 @@ export default function GuPolygon({
               fillOpacity={mouseOverGeo === geo.properties.KOR_NM ? 0.8 : 0.7}
               onMouseover={() => onMouseOver(geo.properties.KOR_NM)}
               onMouseout={onMouseOut}
-              onClick={() => handleClick(center)}
+              onClick={() => {
+                handleClick(center);
+              }}
             />
             <CustomOverlayMap key={`marker-${i}`} position={center}>
               <p className="rounded bg-white p-1 text-sm">{geo.properties.KOR_NM}</p>

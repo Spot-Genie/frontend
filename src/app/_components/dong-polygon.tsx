@@ -6,9 +6,10 @@ import { calculateCenter } from "@/utils/geo";
 
 interface DongPolygonProps {
   geoList: GeoFeature[];
+  setIsPolygonClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function DongPolygon({ geoList }: DongPolygonProps) {
+export default function DongPolygon({ geoList, setIsPolygonClicked }: DongPolygonProps) {
   const [mouseOverGeo, setMouseOverGeo] = useState<string | null>(null);
 
   const handleMouseOver = (name: string) => {
@@ -41,9 +42,12 @@ export default function DongPolygon({ geoList }: DongPolygonProps) {
               fillOpacity={mouseOverGeo === geo.properties.KOR_NM ? 0.8 : 0.7}
               onMouseover={() => handleMouseOver(geo.properties.KOR_NM)}
               onMouseout={handleMouseOut}
-              onClick={() => console.log(geo.properties.KOR_NM)}
+              onClick={() => {
+                setIsPolygonClicked(true);
+                console.log(geo.properties.KOR_NM);
+              }}
             />
-            <CustomOverlayMap key={`marker-${i}`} position={center}>
+            <CustomOverlayMap key={`marker-${i}`} position={center} clickable>
               <p className="rounded bg-white p-1 text-sm">{geo.properties.KOR_NM}</p>
             </CustomOverlayMap>
           </>
